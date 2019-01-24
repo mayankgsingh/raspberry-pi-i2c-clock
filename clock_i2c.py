@@ -42,6 +42,7 @@ row2=["Sydney"]
 row2Idx=0
 row2Txt=""
 USEI2C=True
+CLOCK_FORMAT_12H=True
 
 GPIO.setmode(GPIO.BOARD)
 if USEI2C:
@@ -63,7 +64,10 @@ while True:
 		row2.append(now.strftime("%A"))
 		checkCalendar()
 	updateSecondLine()
-	tmpstr=now.strftime("%d%b%Y %H:%M")
+	if CLOCK_FORMAT_12H:
+		tmpstr=now.strftime("%d %b %I:%M %p")
+	else:
+		tmpstr=now.strftime("%d%b%Y %H:%M")
 	if lcdstr != tmpstr:
 		lcdstr = tmpstr
 		writeString(0, lcdstr)
